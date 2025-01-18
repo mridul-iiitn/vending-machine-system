@@ -4,10 +4,10 @@
 This repository contains the implementation of a vending machine system using Verilog. The project models the functionality of a vending machine, supporting multiple items, coin-based transactions, and a transaction log system.  
 
 ## Features  
-- State machine-based design with **7 unique states**.  
+- State machine-based design with **5 unique states**.  
 - Modular implementation for **4 distinct items**.  
 - Supports transactions with nickel (5 Rs) and dime (10 Rs) inputs.  
-- Dispenses items, calculates change, and handles incomplete transactions.  
+- Dispenses items and handles incomplete transactions.  
 - Testbench with **10+ test cases** to validate functionality.  
 
 ## Project Structure  
