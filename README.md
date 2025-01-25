@@ -1,4 +1,4 @@
-# vending-machine-system
+# Vending-machine-system
 
 This repository contains the implementation of a vending machine system using Verilog. The project models the functionality of a vending machine, supporting multiple items, coin-based transactions, and a transaction log system.  
 
