@@ -34,17 +34,19 @@ module Item_One(nickel_in, dime_in, clock, reset, nickel_out, dispense);
 
             S5: // From 5 cents collected
                 if (nickel_in)      begin next_state = S10; {nickel_out, dispense} = 2'b00; end
-                else if (dime_in)   begin next_state = S15; {nickel_out, dispense} = 2'b01; end
+                else if (dime_in)   begin next_state = S15; {nickel_out, dispense} = 2'b00; end
                 else               begin next_state = S5;  {nickel_out, dispense} = 2'b00; end
 
             S10: // From 10 cents collected
-                if (nickel_in)      begin next_state = S15; {nickel_out, dispense} = 2'b01; end
-                else if (dime_in)   begin next_state = S20; {nickel_out, dispense} = 2'b11; end
-                else               begin next_state = S10; {nickel_out, dispense} = 2'b00; end
+               if (nickel_in)      begin next_state = S15; {nickel_out, dispense} = 2'b00; end
+               else if (dime_in)   begin next_state = S20; {nickel_out, dispense} = 2'b01; end
+               else               begin next_state = S10; {nickel_out, dispense} = 2'b00; end
 
             S15: // Dispense the item and reset
-                begin next_state = S0; {nickel_out, dispense} = 2'b00; end
-
+              if(nickel_in)       begin next_state= S20; {nickel_out,dispense}= 2'b01; end
+              else if (dime_in)   begin next_state = S0; {nickel_out, dispense} = 2'b11; end
+               else               begin next_state = S15; {nickel_out, dispense} = 2'b00; end
+          
             S20: // Dispense the item and reset
                 begin next_state = S0; {nickel_out, dispense} = 2'b00; end
 
@@ -91,16 +93,19 @@ module Item_Two(nickel_in, dime_in, clock, reset, nickel_out, dispense);
 
             S10: // From 10 cents collected
                 if (nickel_in)      begin next_state = S15; {nickel_out, dispense} = 2'b00; end
-                else if (dime_in)   begin next_state = S20; {nickel_out, dispense} = 2'b01; end
+                else if (dime_in)   begin next_state = S20; {nickel_out, dispense} = 2'b00; end
                 else               begin next_state = S10; {nickel_out, dispense} = 2'b00; end
 
             S15: // From 15 cents collected
-                if (nickel_in)      begin next_state = S20; {nickel_out, dispense} = 2'b01; end
-                else if (dime_in)   begin next_state = S25; {nickel_out, dispense} = 2'b11; end
-                else               begin next_state = S15; {nickel_out, dispense} = 2'b00; end
+               if (nickel_in)      begin next_state = S20; {nickel_out, dispense} = 2'b00; end
+               else if (dime_in)   begin next_state = S25; {nickel_out, dispense} = 2'b01; end
+               else               begin next_state = S15; {nickel_out, dispense} = 2'b00; end
 
             S20: // Dispense the item and reset
-                begin next_state = S0; {nickel_out, dispense} = 2'b00; end
+              if (nickel_in)      begin next_state = S25; {nickel_out, dispense} = 2'b01; end
+              else if (dime_in)   begin next_state = S0; {nickel_out, dispense} = 2'b11; end
+              else               begin next_state = S20; {nickel_out, dispense} = 2'b00; end
+
 
             S25: // Dispense the item and reset
                 begin next_state = S0; {nickel_out, dispense} = 2'b00; end
@@ -147,22 +152,24 @@ module Item_Three(nickel_in, dime_in, clock, reset, nickel_out, dispense);
                 else               begin next_state = S5;  {nickel_out, dispense} = 2'b00; end
             
             S10:
-                if(nickel_in)      begin next_state = S15; {nickel_out, dispense} = 2'b00; end
+              if(nickel_in)      begin next_state = S15; {nickel_out, dispense} = 2'b00; end
                 else if(dime_in)   begin next_state = S20; {nickel_out, dispense} = 2'b00; end
                 else               begin next_state = S10; {nickel_out, dispense} = 2'b00; end
             
             S15:
                 if(nickel_in)      begin next_state = S20; {nickel_out, dispense} = 2'b00; end
-                else if(dime_in)   begin next_state = S25; {nickel_out, dispense} = 2'b01; end
+                else if(dime_in)   begin next_state = S25; {nickel_out, dispense} = 2'b00; end
                 else               begin next_state = S15; {nickel_out, dispense} = 2'b00; end
             
             S20:
-                if(nickel_in)      begin next_state = S25; {nickel_out, dispense} = 2'b01; end
-                else if(dime_in)   begin next_state = S30; {nickel_out, dispense} = 2'b11; end
+                if(nickel_in)      begin next_state = S25; {nickel_out, dispense} = 2'b00; end
+                else if(dime_in)   begin next_state = S30; {nickel_out, dispense} = 2'b01; end
                 else               begin next_state = S20; {nickel_out, dispense} = 2'b00; end
             
             S25:
-                begin next_state = S0; {nickel_out, dispense} = 2'b00; end
+                if(nickel_in)      begin next_state = S30; {nickel_out, dispense} = 2'b01; end
+                else if(dime_in)   begin next_state = S0; {nickel_out, dispense} = 2'b11; end
+                else               begin next_state = S25; {nickel_out, dispense} = 2'b00; end
             
             S30:
                 begin next_state = S0; {nickel_out, dispense} = 2'b00; end
@@ -216,21 +223,23 @@ module Item_Four(nickel_in, dime_in, clock, reset, nickel_out, dispense);
             
             S15:
                 if(nickel_in)      begin next_state = S20; {nickel_out, dispense} = 2'b00; end
-                else if(dime_in)   begin next_state = S25; {nickel_out, dispense} = 2'b01; end
+                else if(dime_in)   begin next_state = S25; {nickel_out, dispense} = 2'b00; end
                 else               begin next_state = S15; {nickel_out, dispense} = 2'b00; end
             
             S20:
                 if(nickel_in)      begin next_state = S25; {nickel_out, dispense} = 2'b00; end
-                else if(dime_in)   begin next_state = S30; {nickel_out, dispense} = 2'b01; end
+                else if(dime_in)   begin next_state = S30; {nickel_out, dispense} = 2'b00; end
                 else               begin next_state = S20; {nickel_out, dispense} = 2'b00; end
             
             S25:
-                if(nickel_in)      begin next_state = S30; {nickel_out, dispense} = 2'b01; end
-                else if(dime_in)   begin next_state = S35; {nickel_out, dispense} = 2'b11; end
+                if(nickel_in)      begin next_state = S30; {nickel_out, dispense} = 2'b00; end
+                else if(dime_in)   begin next_state = S35; {nickel_out, dispense} = 2'b01; end
                 else               begin next_state = S25; {nickel_out, dispense} = 2'b00; end
             
             S30:
-                begin next_state = S0; {nickel_out, dispense} = 2'b00; end
+              if(nickel_in)      begin next_state = S35; {nickel_out, dispense} = 2'b01; end
+              else if(dime_in)   begin next_state = S0; {nickel_out, dispense} = 2'b11; end
+              else               begin next_state = S30; {nickel_out, dispense} = 2'b00; end
 
             S35:
                 begin next_state = S0; {nickel_out, dispense} = 2'b00; end
