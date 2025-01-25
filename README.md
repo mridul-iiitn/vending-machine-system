@@ -25,8 +25,11 @@ This repository contains the implementation of a vending machine system using Ve
    ```bash
    git clone https://github.com/mridul-iiitn/vending-machine-system.git
    cd vending-machine-system
+   
 2.Open the Verilog files in your simulator.
+
 3.Run the testbench (VendingMachine_TestBench) to simulate the vending machine functionality.
+
 4.View the output in the waveform or simulation log.
 
 Simulation Scenarios
