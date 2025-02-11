@@ -7,11 +7,11 @@
 module VendingMachine_TestBench();
     // Defining the inputs and the outputs
     reg [3:0] item_number;
-    reg nickel_in, dime_in, clock, reset;
-    wire nickel_out, dispense;
+    reg rupee_five_in, rupee_ten_in, clock, reset;
+    wire rupee_five_out, dispense;
     
     // Calling the module 
-    VendingMachine VM(.item_number(item_number), .nickel_in(nickel_in), .dime_in(dime_in), .clock(clock), .reset(reset), .nickel_out(nickel_out), .dispense(dispense));
+    VendingMachine VM(.item_number(item_number), .rupee_five_in(rupee_five_in), .rupee_ten_in(rupee_ten_in), .clock(clock), .reset(reset), .rupee_five_out(rupee_five_out), .dispense(dispense));
 
     // Intialising the clock value
     initial clock = 1;
@@ -23,8 +23,8 @@ module VendingMachine_TestBench();
     initial begin
         // Initialising the values
         item_number = 4'b0010;
-        nickel_in = 0;
-        dime_in = 0;
+        rupee_five_in = 0;
+        rupee_ten_in = 0;
         reset = 0;
 
         // Giving new inputs at regular intervals
@@ -35,28 +35,28 @@ module VendingMachine_TestBench();
         reset = 0;
 
         #(`clock_period);
-        nickel_in = 1;
-        dime_in = 0;
+        rupee_five_in = 1;
+        rupee_ten_in = 0;
         
         #(`clock_period);
-        nickel_in = 0; 
-        dime_in = 1;
+        rupee_five_in = 0; 
+        rupee_ten_in = 1;
 
         #(`clock_period);
-        nickel_in = 0;
-        dime_in = 0;
+        rupee_five_in = 0;
+        rupee_ten_in = 0;
         
         #(`clock_period);
-        nickel_in = 0;
-        dime_in = 1;
+        rupee_five_in = 0;
+        rupee_ten_in = 1;
 
         #(`clock_period);
-        nickel_in = 0;
-        dime_in = 0;
+        rupee_five_in = 0;
+        rupee_ten_in = 0;
 
         #(`clock_period);
-        nickel_in = 0;
-        dime_in = 0;
+        rupee_five_in = 0;
+        rupee_ten_in = 0;
 
         #(`clock_period);
 
